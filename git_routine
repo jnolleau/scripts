@@ -18,7 +18,7 @@ then
 	echo ' -n, --no-pull		prevent pulling before pushing'
 	echo ' -h, --help		display ths help'
 else
-	if [[ "$1" = '-n' ]] || [[ "$1" = '--no-pull' ]];
+	if [[ "$1" != '-n' ]] || [[ "$1" != '--no-pull' ]];
 	then
 		echo -e "${YELLOW}git pull${NC}"
 		git pull
