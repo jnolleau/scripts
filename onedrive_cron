@@ -1,0 +1,12 @@
+#!/bin/bash
+
+onedrive --synchronize
+# default='Local directory is out of sync with OneDrive'
+# string=`onedrive --display-sync-status | grep Local`
+
+# if [ "$string" = "$default" ]
+# 	then
+# 		onedrive --synchronize
+# 	else
+# 		echo "Local directory is up to date with OneDrive"
+# fi

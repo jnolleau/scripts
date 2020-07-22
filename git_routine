@@ -1,0 +1,54 @@
+#!/bin/bash
+
+YELLOW='\033[0;33;1m' # Yellow bold
+NC='\033[0m' # No Color
+
+if [ $LANG = 'fr_FR.UTF-8' ];
+then
+	first='rien'
+	default='rien à valider, la copie de travail est propre'
+else
+	first='nothing'
+	default='nothing to commit, working tree clean'
+fi
+
+if [[ "$1" = '-h' ]] || [[ "$1" = '--help' ]];
+then
+	echo 'gpa [-nh]'
+	echo ' -n, --no-pull		prevent pulling before pushing'
+	echo ' -h, --help		display ths help'
+else
+	if [[ "$1" = '-n' ]] || [[ "$1" = '--no-pull' ]];
+	then
+		echo -e "${YELLOW}git pull${NC}"
+		git pull
+	fi
+
+	echo -e "${YELLOW}git status${NC}"
+	status=`git status| grep "$first"`
+
+	if [ "$status" != "$default" ];
+	then
+		git status
+		read -e -t 30 -p 'Would to like to add, commit and push all ? [y/n] ' answer
+		if [ $? -ne 142 ];
+		then
+			if [ "$answer" = 'y' ] || [ "$answer" = 'yes' ];
+			then
+				git add --all
+				while [ -z "$commit_message" ];
+				do
+					read -e -p 'Enter you commit message: ' commit_message
+				done
+				git commit -m "$commit_message"
+				git push origin master
+			else
+				echo exit
+			fi
+		else
+			echo -e '\nCommit timeout, aborting'
+		fi
+	else
+		echo "$default"
+	fi
+fi
