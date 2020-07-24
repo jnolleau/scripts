@@ -41,7 +41,7 @@ else
 					read -e -p 'Enter you commit message: ' commit_message
 				done
 				git commit -m "$commit_message"
-				git push origin master
+				git push
 			else
 				echo exit
 			fi
