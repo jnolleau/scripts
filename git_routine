@@ -16,20 +16,21 @@ if [[ "$1" = '-h' ]] || [[ "$1" = '--help' ]];
 then
 	echo 'gpa [-nh]'
 	echo ' -n, --no-pull		prevent pulling before pushing'
-	echo ' -h, --help		display ths help'
+	echo ' -h, --help		display this help'
 else
-	if [[ "$1" != '-n' ]] || [[ "$1" != '--no-pull' ]];
+	if [[ "$1" != '-n' ]] && [[ "$1" != '--no-pull' ]];
 	then
 		echo -e "${YELLOW}git pull${NC}"
 		git pull
 	fi
 
 	echo -e "${YELLOW}git status${NC}"
-	status=`git status| grep "$first"`
+	status=`git status | grep "$first"`
 
 	if [ "$status" != "$default" ];
 	then
 		git status
+		branch=`git branch --show-current`
 		read -e -t 30 -p 'Would to like to add, commit and push all ? [y/n] ' answer
 		if [ $? -ne 142 ];
 		then
@@ -41,7 +42,7 @@ else
 					read -e -p 'Enter you commit message: ' commit_message
 				done
 				git commit -m "$commit_message"
-				git push
+				git push origin $branch
 			else
 				echo exit
 			fi
