@@ -31,7 +31,7 @@ else
 	then
 		git status
 		branch=`git branch --show-current`
-		read -e -t 30 -p 'Would to like to add, commit and push all ? [y/n] ' answer
+		read -e -t 30 -p 'Would you like to add, commit and push all ? [y/n] ' answer
 		if [ $? -ne 142 ];
 		then
 			if [ "$answer" = 'y' ] || [ "$answer" = 'yes' ];
