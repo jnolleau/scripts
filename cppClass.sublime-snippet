@@ -1,0 +1,32 @@
+<snippet>
+	<content><![CDATA[#ifndef $1
+# define ${1:${TM_FILENAME/(([A-Z])([A-Z][a-z]))|(([a-z])([A-Z]))|([a-z])|(\.)/\U(?1:$2_$3)(?4:$5_$6)$7(?8:_)\E/g}}
+
+# include <string>
+# include <iostream>
+
+class ${2:${TM_FILENAME/(.+)\..+|.*/$1/:name}} {
+
+private:
+	${6:/* attributes */}
+
+public:
+	$2(void);
+	$2(${3:/* overload */});
+	$2(${4:/* overload */});
+	$2($2 const & copy);
+	~$2(${5:void});
+	$2& operator=($2 const & rhs);
+};
+
+std::ostream & operator<<(std::ostream & o, $2 const & rhs);
+
+#endif // $1
+
+]]></content>
+	<!-- Optional: Set a tabTrigger to define how to trigger the snippet -->
+	<tabTrigger>cl</tabTrigger>
+	<!-- Optional: Set a scope to limit where the snippet will trigger -->
+	<scope>source.c++</scope>
+	<description>cppClass42</description>
+</snippet>
