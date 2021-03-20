@@ -1,0 +1,16 @@
+#!/bin/bash
+
+echo -e "\033[33;1msudo apt update \033[0m"
+sudo apt update
+echo -e "\033[33;1msudo apt upgrade \033[0m"
+apt list --upgradable
+sudo apt upgrade
+echo -e "\033[33;1msudo apt autoremove \033[0m"
+sudo apt autoremove
+
+# Open ans edit cron file
+	# sudo crontab -e
+# Change package installed status ie. to "auto installed"
+	# sudo apt-mark auto <package>
+# List of listen ports
+	# sudo lsof -i -P -n | grep LISTEN 
