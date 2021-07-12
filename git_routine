@@ -50,6 +50,6 @@ else
 			echo -e '\nCommit timeout, aborting'
 		fi
 	else
-		echo "$default"
+		echo "$status"
 	fi
 fi

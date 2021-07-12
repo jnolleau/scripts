@@ -105,7 +105,6 @@ source $ZSH/oh-my-zsh.sh
 # Example aliases
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
-alias norminette="~/.norminette/norminette.rb 2>/dev/null"
 alias gpa="~/scripts/git_routine"
 alias apt_routine="~/scripts/apt_routine"
 alias server="~/web/webserver/setup.sh"

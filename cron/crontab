@@ -7,5 +7,5 @@
 # |  |  |  |  |
 # *  *  *  *  *  user command to be executed
 
-# Onedrive -> every day at 22h
-0 22 * * sh /home/julien/scripts/onedrive_cron.sh
+# Onedrive -> every day at 21h
+0 21 * * * ~/scripts/onedrive_cron
