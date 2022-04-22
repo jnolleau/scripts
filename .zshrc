@@ -76,7 +76,7 @@ ZSH_THEME="robbyrussell"
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
 #  examples : docker docker-compose kubectl
-plugins=(git docker kubectl)
+plugins=(git docker)
 
 source $ZSH/oh-my-zsh.sh
 
@@ -108,3 +108,24 @@ source $ZSH/oh-my-zsh.sh
 alias gpa="~/scripts/git_routine"
 alias apt_routine="~/scripts/apt_routine"
 alias server="~/web/webserver/setup.sh"
+alias norm="/home/julien/.local/bin/norminette"
+export PATH="/home/julien/miniconda3/bin:$PATH"
+
+# >>> conda initialize >>>
+# !! Contents within this block are managed by 'conda init' !!
+__conda_setup="$('/home/julien/miniconda3/bin/conda' 'shell.zsh' 'hook' 2> /dev/null)"
+if [ $? -eq 0 ]; then
+    eval "$__conda_setup"
+else
+    if [ -f "/home/julien/miniconda3/etc/profile.d/conda.sh" ]; then
+        . "/home/julien/miniconda3/etc/profile.d/conda.sh"
+    else
+        export PATH="/home/julien/miniconda3/bin:$PATH"
+    fi
+fi
+unset __conda_setup
+
+#To not activate env at shell startup
+conda deactivate
+# <<< conda initialize <<<
+
