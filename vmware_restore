@@ -1,0 +1,13 @@
+#!/bin/bash
+
+# Restore the installation of vmmon and vmnet modules of vmware
+# To do after kernel update
+
+# sudo vmware-modconfig --console --install-all
+# cd ~/Downloads
+openssl req -new -x509 -newkey rsa:2048 -keyout VMWARE16.priv -outform DER -out VMWARE16.der -nodes -days 36500 -subj "/CN=VMWARE/"
+sudo /usr/src/linux-headers-$(uname -r)/scripts/sign-file sha256 ./VMWARE16.priv ./VMWARE16.der $(/sbin/modinfo -n vmmon)
+sudo /usr/src/linux-headers-$(uname -r)/scripts/sign-file sha256 ./VMWARE16.priv ./VMWARE16.der $(/sbin/modinfo -n vmnet)
+tail $(/sbin/modinfo -n vmmon) | grep "Module signature appended"
+sudo mokutil --import VMWARE16.der
+echo "please reboot for changements take effect"
