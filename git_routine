@@ -5,10 +5,8 @@ NC='\033[0m' # No Color
 
 if [ $LANG = 'fr_FR.UTF-8' ];
 then
-	first='rien'
 	default='rien à valider, la copie de travail est propre'
 else
-	first='nothing'
 	default='nothing to commit, working tree clean'
 fi
 
@@ -25,9 +23,9 @@ else
 	fi
 
 	echo -e "${YELLOW}git status${NC}"
-	status=`git status | grep "$first"`
+	status=`git status -s | wc -l`
 
-	if [ "$status" != "$default" ];
+	if [ "$status" != "0" ];
 	then
 		git status
 		branch=`git branch --show-current`
@@ -50,6 +48,6 @@ else
 			echo -e '\nCommit timeout, aborting'
 		fi
 	else
-		echo "$status"
+		echo "$default"
 	fi
 fi
