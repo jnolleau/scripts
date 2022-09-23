@@ -3,8 +3,14 @@
 # Restore the installation of vmmon and vmnet modules of vmware
 # To do after kernel update
 
+# Download modules at https://github.com/mkubecek/vmware-host-modules/tags 
+# unzip vmware-host-modules-p16.*
+# cd vmware-host-modules-p16*
+# tar -cf vmmon.tar vmmon-only
+# tar -cf vmnet.tar vmnet-only
+# sudo cp -v vmmon.tar vmnet.tar /usr/lib/vmware/modules/source/
 # sudo vmware-modconfig --console --install-all
-# cd ~/Downloads
+
 openssl req -new -x509 -newkey rsa:2048 -keyout VMWARE16.priv -outform DER -out VMWARE16.der -nodes -days 36500 -subj "/CN=VMWARE/"
 sudo /usr/src/linux-headers-$(uname -r)/scripts/sign-file sha256 ./VMWARE16.priv ./VMWARE16.der $(/sbin/modinfo -n vmmon)
 sudo /usr/src/linux-headers-$(uname -r)/scripts/sign-file sha256 ./VMWARE16.priv ./VMWARE16.der $(/sbin/modinfo -n vmnet)
