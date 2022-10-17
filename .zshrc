@@ -72,12 +72,20 @@ ZSH_THEME="robbyrussell"
 # Would you like to use another custom folder than $ZSH/custom?
 # ZSH_CUSTOM=/path/to/new-custom-folder
 
+
+# [zsh-autosuggestions]
+# Disable autosuggestion for large buffers > 20 char
+export ZSH_AUTOSUGGEST_BUFFER_MAX_SIZE='50'
+# Change suggestion color
+# export ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE='fg=5'
+
 # Which plugins would you like to load?
 # Standard plugins can be found in $ZSH/plugins/
 # Custom plugins may be added to $ZSH_CUSTOM/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git docker aliases)
+plugins=(git docker ansible aliases zsh-autosuggestions)
+
 
 zstyle ':completion:*:*:docker:*' option-stacking yes
 zstyle ':completion:*:*:docker-*:*' option-stacking yes
@@ -114,6 +122,7 @@ alias gpa="~/scripts/git_routine"
 alias apt_routine="~/scripts/apt_routine"
 alias server="~/web/webserver/setup.sh"
 alias norm="/home/julien/.local/bin/norminette"
+alias bfg="java -jar /home/julien/scripts/bfg-1.14.0.jar"
 # export PATH="/home/julien/miniconda3/bin:$PATH"
 
 # # >>> conda initialize >>>
