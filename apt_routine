@@ -8,9 +8,21 @@ sudo apt upgrade
 echo -e "\033[33;1msudo apt autoremove \033[0m"
 sudo apt autoremove
 
+stat /var/run/reboot-required 2>/dev/null
+if [ $? -eq 0 ]; then
+	read -e -t 30 -p 'Would you like to reboot? [y/n] ' answer
+	if [ $? -ne 142 ]; then
+		if [ "$answer" = 'y' ] || [ "$answer" = 'yes' ]; then
+			reboot
+		else
+			echo exit
+		fi
+	fi
+fi
+
 # Open ans edit cron file
-	# sudo crontab -e
+# sudo crontab -e
 # Change package installed status ie. to "auto installed"
-	# sudo apt-mark auto <package>
+# sudo apt-mark auto <package>
 # List of listen ports
-	# sudo lsof -i -P -n | grep LISTEN 
+# sudo lsof -i -P -n | grep LISTEN

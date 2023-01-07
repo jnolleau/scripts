@@ -1,42 +1,35 @@
 #!/bin/bash
 
 YELLOW='\033[0;33;1m' # Yellow bold
-NC='\033[0m' # No Color
+NC='\033[0m'          # No Color
 
-if [ $LANG = 'fr_FR.UTF-8' ];
-then
+if [ $LANG = 'fr_FR.UTF-8' ]; then
 	default='rien à valider, la copie de travail est propre'
 else
 	default='nothing to commit, working tree clean'
 fi
 
-if [[ "$1" = '-h' ]] || [[ "$1" = '--help' ]];
-then
+if [[ "$1" = '-h' ]] || [[ "$1" = '--help' ]]; then
 	echo 'gpa [-nh]'
 	echo ' -n, --no-pull		prevent pulling before pushing'
 	echo ' -h, --help		display this help'
 else
-	if [[ "$1" != '-n' ]] && [[ "$1" != '--no-pull' ]];
-	then
+	if [[ "$1" != '-n' ]] && [[ "$1" != '--no-pull' ]]; then
 		echo -e "${YELLOW}git pull${NC}"
 		git pull
 	fi
 
 	echo -e "${YELLOW}git status${NC}"
-	status=`git status -s | wc -l`
+	status=$(git status -s | wc -l)
 
-	if [ "$status" != "0" ];
-	then
+	if [ "$status" != "0" ]; then
 		git status
-		branch=`git branch --show-current`
+		branch=$(git branch --show-current)
 		read -e -t 30 -p 'Would you like to add, commit and push all ? [y/n] ' answer
-		if [ $? -ne 142 ];
-		then
-			if [ "$answer" = 'y' ] || [ "$answer" = 'yes' ];
-			then
+		if [ $? -ne 142 ]; then
+			if [ "$answer" = 'y' ] || [ "$answer" = 'yes' ]; then
 				git add --all
-				while [ -z "$commit_message" ];
-				do
+				while [ -z "$commit_message" ]; do
 					read -e -p 'Enter you commit message: ' commit_message
 				done
 				git commit -m "$commit_message"
